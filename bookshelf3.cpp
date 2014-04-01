@@ -16,8 +16,8 @@ struct book{
 };
 
 int main(int argc, char* argv[] ) {
-    int addTrack = 0, remTrack;
-    int bookCount = 0, booksWidth = 0, shelfWidth = 10;
+    int addTrack = 0, remTrack, initTrack = 0;
+    int bookCount = 0, booksWidth = 0, shelfWidth = 10, caseCount;
     int widthHolder;
 	
 	ifstream myFile;
@@ -29,6 +29,21 @@ int main(int argc, char* argv[] ) {
 		while (getline (myFile, line)) {
 			iss << line;
 			while (getline (iss, inputThing, ' ')) {
+				if (initTrack == 0) {
+					//will probably have to be converted.
+					// To iterate, don't use while, use if caseCount > 0
+					caseCount = inputThing;
+					initTrack++;
+				}
+				// This is where the case loop will start. Each case will need fresh vector, stringstream, booksWidth, bookCount
+				else if (initTrack == 1) {
+					//Also will probably have to be converted
+					shelfWidth = inputThing;
+					initTrack++;
+				}
+				else if (initTrack == 2) {
+				
+				}
 				if (addTrack == 2) {
 					shelf.push_back(book());
 					shelf[bookCount].name = inputThing;
@@ -67,7 +82,12 @@ int main(int argc, char* argv[] ) {
 					else if (inputThing[0] == 'R') {
 						remTrack = 2;
 					}
+					// Needs to update Case #
 					else if (inputThing[0] == 'X') {
+						cout << "Case " << caseCount << " :" << endl;
+						for (int j = 0; j != shelf.size(); i++) {
+							cout << shelf[j].name << endl;
+						}
 					}
 				}
 			}
